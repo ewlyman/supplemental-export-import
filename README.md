@@ -19,14 +19,15 @@ The following steps are a kludge but, as we will see, they are a necessary and r
 
 2. Run the migration import for the target content type
 3. Spot check the imported content to make sure the prior node id field also populated.
+4. Refer to the file *news_event_location_export_feed.txt* for a copy of the export view used on the UA News site. The file *event\-location\-export.csv* is an example of feed output.
 
-In the case of the New Event migration, I also had to remove the original paragraph reference for event addresses from the content type and replace it with a regular fieldset. The Field Clone <https://www.drupal.org/project/fieldclone> module greatly sped up this process.
+In the case of the News Event migration, I also had to remove the original paragraph reference for event addresses from the content type and replace it with a regular fieldset. The Field Clone <https://www.drupal.org/project/fieldclone> module greatly sped up this process.
 
 
 ### Source Export Setup and Download ###
 
 1. Install and enable \(or, just enable, if it's already installed\) the Views Data Export module <https://www.drupal.org/project/views_data_export> on the source site
-2. Create a new view of the source content type and add a Data Export display \(In my case, I created a simple .CSV export, because I anticipated the data might require manual cleanup\)
+2. Create a new view of the source content type and add a Data Export display \(In my case, I created a simple \.CSV export, because I anticipated the data might require manual cleanup\)
 3. In the view created above, add a row for the current node ID, and additional individual rows for each field that you intend to export
 4. Sort the view by current node ID \(This will be used for manual validation/cleanup if needed\)
 5. View the export feed or download the export data file and spot check to confirm the correct data is being emitted by the source site
@@ -38,13 +39,17 @@ In the case of the New Event migration, I also had to remove the original paragr
     - Import period *Off* \(Because we were uploading a single CSV file\)
     - No changes to *Fetcher Settings*
     - No changes to *Parser Settings*
-    - Processor settings were: do not create new, keep previous items, never expire items and under *Advanced settings* create a revision and force update. \(refer to included png *Screenshot Event Adress Feed Mappings*\)
+    - Processor settings were: do not insert new, update previous items, keep previous items, never expire items and under *Advanced settings* create a revision and force update. \(refer to included png *Screenshot Event Adress Feed Mappings*\)
 3. To set up feed mappings, please follow the instructions at <https://www.drupal.org/docs/contributed-modules/feeds/creating-and-editing-import-feeds#mapping-sources-targets>
 - I used the source\_nid/Prior NID as the unique field, as this would match street addresses from Event nodes on the source site to street addresses for the corresponding Event nodes on the target site.
 - Please refer to the included png *Screenshot Event Addresses Feed Mappings* for an example \(these are the field definitions I used\)
 
-###  
-
+###  Target Import Process ###
+1. Create the Feed importer at *admin \> content \> feeds* \-if you have more than one Feed type on the site, when you select *Add feed* you will need to select the feed type you created in the previous step
+2. You will be prompted to add a title for the feed and upload the import \.CSV file
+3. Uncheck *Active* in the *Import options* tab, and then select the *Save and Import* button
+- Refer to the png files *Screenshot Event add feed* and *Screenshot Event finished feed*. *Screenshot import complete* shows the status message that appears when the import is finished.
+4. Spot check the target content type to confirm the Feeds import.
 
 
 

@@ -1,0 +1,109 @@
+uuid: de0be494-381c-47d0-b3bb-e615906ff3d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.az_event.field_custom_city
+    - field.field.node.az_event.field_custom_prior_nid
+    - field.field.node.az_event.field_custom_state
+    - field.field.node.az_event.field_custom_street_additional
+    - field.field.node.az_event.field_custom_street_address
+    - node.type.az_event
+  module:
+    - node
+label: 'New Event Location Import'
+id: new_event_location_import
+description: ''
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: az_event
+  langcode: en
+  insert_new: 0
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: true
+  authorize: false
+  revision: true
+  expire: -1
+  owner_feed_author: false
+  owner_id: 1
+custom_sources:
+  event_node_id:
+    value: ID
+    label: ID
+    machine_name: event_node_id
+    type: csv
+  event_source_street:
+    value: Street
+    label: Street
+    machine_name: event_source_street
+    type: csv
+  event_source_additional:
+    value: Additional
+    label: Additional
+    machine_name: event_source_additional
+    type: csv
+  event_source_city:
+    value: City
+    label: City
+    machine_name: event_source_city
+    type: csv
+  event_source_province:
+    value: Province
+    label: Province
+    machine_name: event_source_province
+    type: csv
+  event_source_nid:
+    value: source_nid
+    label: source_nid
+    machine_name: event_source_nid
+    type: csv
+mappings:
+  -
+    target: field_custom_street_address
+    map:
+      value: event_source_street
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_custom_street_additional
+    map:
+      value: event_source_additional
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_custom_city
+    map:
+      value: event_source_city
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_custom_state
+    map:
+      value: event_source_province
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_custom_prior_nid
+    map:
+      value: event_source_nid
+    settings:
+      language: null
+    unique:
+      value: 1
