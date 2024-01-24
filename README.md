@@ -48,7 +48,8 @@ In the case of the News Event migration, I also had to remove the original parag
 1. Create the Feed importer at *admin \> content \> feeds* \-if you have more than one Feed type on the site, when you select *Add feed* you will need to select the feed type you created in the previous step
 2. You will be prompted to add a title for the feed and upload the import \.CSV file
 3. Uncheck *Active* in the *Import options* tab, and then select the *Save and Import* button
-- Refer to the png files *Screenshot Event add feed* and *Screenshot Event finished feed*. *Screenshot import complete* shows the status message that appears when the import is finished.
+- Refer to the png files *Screenshot Event add feed* and *Screenshot Event finished feed*. 
+- *Screenshot import complete* shows the status message that appears when the import is finished.
 4. Spot check the target content type to confirm the Feeds import.
 
 
